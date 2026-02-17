@@ -1,11 +1,21 @@
-import React from 'react'
+import axios from "axios";
+import { Posts } from "@/types/post";
 
-const AboutPage = () => {
+const AboutPage = async () => {
+  const posts = await axios.get(
+    "https://jsonplaceholder.typicode.com/posts?_limit=5",
+  );
+
   return (
     <div>
-      <h1>Hello About</h1>
+      {posts.data.map((el: Posts) => (
+        <div key={el.id}>
+          <h1>{el.title}</h1>
+          <p>{el.body}</p>
+        </div>
+      ))}
     </div>
   );
-}
+};
 
-export default AboutPage
+export default AboutPage;
