@@ -1,6 +1,5 @@
 "use server";
 import { Todo } from "@/types/todo";
-import { nanoid } from "nanoid";
 
 
 let todo: Todo[] = [
@@ -12,10 +11,16 @@ export async function getTodos() {
 }
 export const createPost = async (formData: FormData) => {
   const title = formData.get("title")?.toString() || "";
-  const id = 34
+  const id = Math.floor(Math.random() * 1000000);
+  const userId = Math.floor(Math.random() * 1000000);
   const completed = false;
-  const userId = 12
     todo.push({ title, completed, id, userId });
+    console.log(todo);
 };
-
+export const deletePost = async (formData: FormData) => {
+  const id = formData.get("id")?.toString() || "";
+  
+    todo = todo.filter((el) => el.id !== Number(id));
+    console.log(todo);
+};
 
