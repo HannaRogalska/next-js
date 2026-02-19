@@ -3,7 +3,7 @@ import { createPost, getTodos, deletePost} from "./actions/formAction";
 
 export default async function Home() {
   const todo = await getTodos()
-
+ await new Promise((r) => setTimeout(r, 3000));
   return (
     <div>
       <form action={createPost}>
