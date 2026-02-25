@@ -1,12 +1,16 @@
-import { createPost, getTodos, deletePost} from "./actions/formAction";
+
+import { getTodos, deletePost } from "./actions/formAction";
+import { alertFunction } from "@/helpers/helpers";
 
 
 export default async function Home() {
   const todo = await getTodos()
+  
+ 
  await new Promise((r) => setTimeout(r, 3000));
   return (
     <div>
-      <form action={createPost}>
+      <form action={alertFunction}>
         <input
           type="text"
           name="title"

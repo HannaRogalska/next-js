@@ -4,6 +4,12 @@ const todoSchema = new Schema(
   {
     text: { type: String, required: true },
     done: { type: Boolean, default: false },
+    author: {
+      note: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"User"
+      }
+    }
   },
   { timestamps: true },
 );
