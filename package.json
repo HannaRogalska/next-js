@@ -9,7 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@heroui/button": "^2.2.31",
+    "@heroui/navbar": "^2.2.29",
+    "@heroui/system": "^2.4.27",
+    "@heroui/theme": "^2.4.26",
     "axios": "^1.13.5",
+    "framer-motion": "^12.34.3",
     "mongoose": "^9.2.1",
     "nanoid": "^5.1.6",
     "next": "16.1.6",
