@@ -1,3 +1,4 @@
+"use client"
 import { TaskCardProps } from "@/types/CardType";
 import { useState } from "react";
 
