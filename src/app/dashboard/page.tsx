@@ -4,8 +4,6 @@ import { TaskCard } from "@/components/TaskCard";
 export default async function DashboardPage() {
     const getData = await getStats();
     const getTasks = await allTasks();
-    console.log(getTasks);
-
   return (
     <div className="space-y-8">
       <div>
@@ -35,7 +33,7 @@ export default async function DashboardPage() {
 
         <ul className="space-y-3">
           {getTasks.map((el) => (
-              <TaskCard title={el.title} completed={ el.completed} />
+              <TaskCard key={el.id} title={el.title} completed={ el.completed} id={el.id} />
           ))}
         </ul>
       </div>
