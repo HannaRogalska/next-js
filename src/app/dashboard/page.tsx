@@ -1,7 +1,10 @@
-import { getStats } from "@/api/fakeApi";
+import { getStats, allTasks } from "@/api/fakeApi";
 
 export default async function DashboardPage() {
-  const getData = await getStats();
+    const getData = await getStats();
+    const getTasks = await allTasks();
+    console.log(getTasks);
+    
   return (
     <div className="space-y-8">
       <div>
@@ -30,9 +33,12 @@ export default async function DashboardPage() {
         <h2 className="text-xl font-semibold mb-4">Recent tasks</h2>
 
         <ul className="space-y-3">
-          <li className="border-b pb-2">Make a design dashboard</li>
-          <li className="border-b pb-2">Configure the database</li>
-          <li>Add authorization</li>
+          {getTasks.map((el) => (
+            <li key={el.id} className="border-b pb-2">
+              {el.title}{" "}
+              <input type="checkbox" checked={el.completed} readOnly />
+            </li>
+          ))}
         </ul>
       </div>
     </div>
