@@ -1,9 +1,10 @@
 import { getStats, allTasks } from "@/api/fakeApi";
 import { TaskCard } from "@/components/TaskCard";
+import TasksClient from "@/components/TasksClient";
 
 export default async function DashboardPage() {
-    const getData = await getStats();
-    const getTasks = await allTasks();
+  const [getData, getTasks] = await Promise.all([getStats(), allTasks()]);
+
   return (
     <div className="space-y-8">
       <div>
@@ -30,12 +31,7 @@ export default async function DashboardPage() {
 
       <div className="bg-white p-6 rounded-xl shadow">
         <h2 className="text-xl font-semibold mb-4">Recent tasks</h2>
-
-        <ul className="space-y-3">
-          {getTasks.map((el) => (
-              <TaskCard key={el.id} title={el.title} completed={ el.completed} id={el.id} />
-          ))}
-        </ul>
+            <TasksClient initialTasks={getTasks}/>
       </div>
     </div>
   );

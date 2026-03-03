@@ -1,18 +1,18 @@
 "use client"
-import { TaskCardProps } from "@/types/CardType";
-import { useState } from "react";
+import { Props } from "@/types/Task";
 
-export const TaskCard = ({ title, completed: initialCompleted }: TaskCardProps) => {
-    const [completed, setCompleted] = useState(initialCompleted);
-    const toggle = ()=> setCompleted(!completed)
+export const TaskCard = ({ task, onToggle }: Props) => {
+  
   return (
     <div className="flex items-center justify-between bg-white p-4 rounded-xl shadow">
-      <p className={completed ? "line-through text-gray-400" : ""}>{title}</p>
+      <p className={task.completed ? "line-through text-gray-400" : ""}>
+        {task.title}
+      </p>
       <button
-        onClick={toggle}
-        className={`px-3 py-1 rounded ${completed ? "bg-green-500 text-white" : "bg-gray-200"}`}
+        onClick={() => onToggle(task.id)}
+        className={`px-3 py-1 rounded ${task.completed ? "bg-green-500 text-white" : "bg-gray-200"}`}
       >
-        {completed ? "Done" : "Mark done"}
+        {task.completed ? "Done" : "Mark done"}
       </button>
     </div>
   );
