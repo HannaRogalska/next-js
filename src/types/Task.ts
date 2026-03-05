@@ -1,6 +1,7 @@
 export interface Task  {
   title: string,
   completed: boolean,
+  description?: string
   id: number
 }
 
@@ -11,3 +12,6 @@ export interface PropsTasks {
    task: Task;
    onToggle: (id: number) => void;
  }
+export interface PropsForm {
+  addTaskForm: ({ title, description, id, completed }: Task) => void;
+}
