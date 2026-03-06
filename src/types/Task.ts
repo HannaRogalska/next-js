@@ -11,6 +11,7 @@ export interface PropsTasks {
  export interface Props {
    task: Task;
    onToggle: (id: number) => void;
+   onDelete: (id: number) => void;
  }
 export interface PropsForm {
   addTaskForm: ({ title, description, id, completed }: Task) => void;

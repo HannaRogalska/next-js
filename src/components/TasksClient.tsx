@@ -15,18 +15,19 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
       setTasks(initialTasks);
     }
   }, [initialTasks]);
-  
+
   useEffect(() => {
-      if (tasks.length === 0) return;
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-    
+    if (tasks.length === 0) return;
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-   
   const addTask = ({ title, description, id, completed }: Task) => {
     setTasks((prev) => [...prev, { title, description, id, completed }]);
   };
-  
+  const deleteTask = (id: number) => {
+   setTasks((prev) => prev.filter((task) => task.id !== id));
+  };
+
   const toggleTask = (id: number) => {
     setTasks((prev) =>
       prev.map((task) =>
@@ -34,12 +35,17 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
       ),
     );
   };
-    return (
-      <div className="space-y-4">
-        <TaskForm addTaskForm={addTask} />
-        {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} onToggle={toggleTask} />
-        ))}
-      </div>
-    );
+  return (
+    <div className="space-y-4">
+      <TaskForm addTaskForm={addTask} />
+      {tasks.map((task) => (
+        <TaskCard
+          key={task.id}
+          task={task}
+          onToggle={toggleTask}
+          onDelete={deleteTask}
+        />
+      ))}
+    </div>
+  );
 }
