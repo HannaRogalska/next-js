@@ -4,9 +4,12 @@ import { PropsTasks, Task } from "@/types/Task";
 import { useEffect, useState } from "react";
 import { TaskCard } from "./TaskCard";
 import TaskForm from "./TaskForm";
+import EditTaskModal from "./EditTaskModal";
 
 export default function TasksClient({ initialTasks }: PropsTasks) {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  
   useEffect(() => {
     const saved = localStorage.getItem("tasks");
     if (saved) {
@@ -27,6 +30,8 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
   const deleteTask = (id: number) => {
    setTasks((prev) => prev.filter((task) => task.id !== id));
   };
+ 
+
 
   const toggleTask = (id: number) => {
     setTasks((prev) =>
@@ -44,8 +49,10 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
           task={task}
           onToggle={toggleTask}
           onDelete={deleteTask}
+          onEdit={(task) => setEditingTask(task)}
         />
       ))}
+      {editingTask && <EditTaskModal task={editingTask} />}
     </div>
   );
 }

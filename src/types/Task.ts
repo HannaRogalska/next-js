@@ -12,7 +12,13 @@ export interface PropsTasks {
    task: Task;
    onToggle: (id: number) => void;
    onDelete: (id: number) => void;
+   onEdit: (task: Task) => void;
  }
 export interface PropsForm {
   addTaskForm: ({ title, description, id, completed }: Task) => void;
+}
+export interface EditTaskModalProps {
+  task: Task; 
+  // onClose: () => void; 
+  // onSave: (updatedTask: Task) => void; 
 }
