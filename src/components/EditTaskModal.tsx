@@ -3,9 +3,10 @@
 import { EditTaskModalProps, Task } from "@/types/Task";
 import { useState } from "react";
 
-const EditTaskModal = ({ task }: EditTaskModalProps) => {
+const EditTaskModal = ({ task, onSave }: EditTaskModalProps) => {
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
+
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
       <div className="bg-white p-6 rounded-xl w-96 space-y-4">
@@ -26,7 +27,10 @@ const EditTaskModal = ({ task }: EditTaskModalProps) => {
         <div className="flex justify-end gap-2">
           <button className="px-3 py-1 bg-gray-200 rounded">Cancel</button>
 
-          <button className="px-3 py-1 bg-blue-600 text-white rounded">
+          <button
+            className="px-3 py-1 bg-blue-600 text-white rounded"
+            onClick={() => onSave({ ...task, title, description } as Task)}
+          >
             Save
           </button>
         </div>

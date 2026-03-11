@@ -9,7 +9,7 @@ import EditTaskModal from "./EditTaskModal";
 export default function TasksClient({ initialTasks }: PropsTasks) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
-  
+
   useEffect(() => {
     const saved = localStorage.getItem("tasks");
     if (saved) {
@@ -28,10 +28,11 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
     setTasks((prev) => [...prev, { title, description, id, completed }]);
   };
   const deleteTask = (id: number) => {
-   setTasks((prev) => prev.filter((task) => task.id !== id));
+    setTasks((prev) => prev.filter((task) => task.id !== id));
   };
- 
-
+  const onChangeTask = (task: Task) => {
+    setTasks((prev) => prev.map((el) => (el.id === task.id ? task : el)));
+  };
 
   const toggleTask = (id: number) => {
     setTasks((prev) =>
@@ -52,7 +53,12 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
           onEdit={(task) => setEditingTask(task)}
         />
       ))}
-      {editingTask && <EditTaskModal task={editingTask} />}
+      {editingTask && (
+        <EditTaskModal
+          task={editingTask}
+          onSave={(task) => onChangeTask(task)}
+        />
+      )}
     </div>
   );
 }

@@ -20,5 +20,5 @@ export interface PropsForm {
 export interface EditTaskModalProps {
   task: Task; 
   // onClose: () => void; 
-  // onSave: (updatedTask: Task) => void; 
+  onSave: (updatedTask: Task) => void; 
 }
