@@ -1,4 +1,4 @@
-import { resolve } from "path";
+
 
 export const getStats = async () => {
     await new Promise((resolve) => setTimeout(resolve, 3000))

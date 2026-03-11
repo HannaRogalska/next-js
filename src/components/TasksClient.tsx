@@ -32,6 +32,7 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
   };
   const onChangeTask = (task: Task) => {
     setTasks((prev) => prev.map((el) => (el.id === task.id ? task : el)));
+    setEditingTask(null)
   };
 
   const toggleTask = (id: number) => {
@@ -57,6 +58,7 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
         <EditTaskModal
           task={editingTask}
           onSave={(task) => onChangeTask(task)}
+          onClose={(() =>setEditingTask(null) )}
         />
       )}
     </div>

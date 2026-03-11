@@ -3,7 +3,7 @@
 import { EditTaskModalProps, Task } from "@/types/Task";
 import { useState } from "react";
 
-const EditTaskModal = ({ task, onSave }: EditTaskModalProps) => {
+const EditTaskModal = ({ task, onSave, onClose }: EditTaskModalProps) => {
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
 
@@ -25,7 +25,12 @@ const EditTaskModal = ({ task, onSave }: EditTaskModalProps) => {
         />
 
         <div className="flex justify-end gap-2">
-          <button className="px-3 py-1 bg-gray-200 rounded">Cancel</button>
+          <button
+            className="px-3 py-1 bg-gray-200 rounded"
+            onClick={() => onClose()}
+          >
+            Cancel
+          </button>
 
           <button
             className="px-3 py-1 bg-blue-600 text-white rounded"
