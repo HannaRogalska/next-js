@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { TaskCard } from "./TaskCard";
 import TaskForm from "./TaskForm";
 import EditTaskModal from "./EditTaskModal";
+import StateBox from "./StateBox";
 
 export default function TasksClient({ initialTasks }: PropsTasks) {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -44,6 +45,7 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
   };
   return (
     <div className="space-y-4">
+      <StateBox initialTasks={tasks} />
       <TaskForm addTaskForm={addTask} />
       {tasks.map((task) => (
         <TaskCard
@@ -58,7 +60,7 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
         <EditTaskModal
           task={editingTask}
           onSave={(task) => onChangeTask(task)}
-          onClose={(() =>setEditingTask(null) )}
+          onClose={() => setEditingTask(null)}
         />
       )}
     </div>
