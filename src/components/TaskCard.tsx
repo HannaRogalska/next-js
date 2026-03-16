@@ -7,6 +7,7 @@ import {
   DropdownItem,
   Button,
 } from "@heroui/react";
+import Link from "next/link";
 
 export const TaskCard = ({ task, onToggle, onDelete, onEdit }: Props) => {
   return (
@@ -29,9 +30,16 @@ export const TaskCard = ({ task, onToggle, onDelete, onEdit }: Props) => {
           </DropdownTrigger>
           <DropdownMenu aria-label="Action event example">
             <DropdownItem
+              key="view"
+              className="px-3 py-1 mr-1 rounded bg-blue-500 text-white mb-1.5 cursor-pointer"
+            >
+              {" "}
+              <Link href={`/dashboard/${task.id}`}>View details</Link>
+            </DropdownItem>
+            <DropdownItem
               key="edit"
               className="px-3 py-1 mr-1 rounded bg-green-500 text-white mb-1.5 cursor-pointer"
-              onClick={()=> onEdit(task)}
+              onClick={() => onEdit(task)}
             >
               Edit file
             </DropdownItem>
