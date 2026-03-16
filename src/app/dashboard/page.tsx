@@ -1,4 +1,4 @@
-import { getStats, allTasks } from "@/api/fakeApi";
+import { getStats, allTasks } from "@/app/api/fakeApi";
 import TasksClient from "@/components/TasksClient";
 
 export default async function DashboardPage() {

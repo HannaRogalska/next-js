@@ -10,7 +10,8 @@ import StateBox from "./StateBox";
 export default function TasksClient({ initialTasks }: PropsTasks) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
-
+  const [dataFromBack, setDataFromBack] = useState<Task[]>([]);
+console.log(dataFromBack)
   useEffect(() => {
     const saved = localStorage.getItem("tasks");
     if (saved) {
@@ -25,6 +26,14 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetch("api/tasks");
+      const tasksFromBack = await data.json()
+      setDataFromBack(tasksFromBack)
+    };
+    fetchData()
+   },[])
   const addTask = ({ title, description, id, completed }: Task) => {
     setTasks((prev) => [...prev, { title, description, id, completed }]);
   };
