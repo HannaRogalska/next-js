@@ -11,7 +11,6 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [dataFromBack, setDataFromBack] = useState<Task[]>([]);
-console.log(dataFromBack)
   useEffect(() => {
     const saved = localStorage.getItem("tasks");
     if (saved) {
@@ -33,9 +32,25 @@ console.log(dataFromBack)
       setDataFromBack(tasksFromBack)
     };
     fetchData()
-   },[])
+  }, [])
+  
+
+    const createPutFun = async () => {
+      await fetch(`/api/tasks`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: "New task updated",
+          description: "Test",
+        }),
+      });
+    };
+ 
   const addTask = ({ title, description, id, completed }: Task) => {
     setTasks((prev) => [...prev, { title, description, id, completed }]);
+    createPutFun()
   };
   const deleteTask = (id: number) => {
     setTasks((prev) => prev.filter((task) => task.id !== id));

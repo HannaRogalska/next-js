@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+
+import { NextRequest, NextResponse } from "next/server";
 
 const db = [
   { title: "Make a design dashboard", completed: false, id: 1 },
@@ -6,6 +7,21 @@ const db = [
   { title: "Add authorization", completed: false, id: 3 },
 ];
 
-export const GET = async () => {
-    return NextResponse.json(db);
+type propPut = {
+  params: {
+    id: string
+  }
 }
+export const GET = (request: NextRequest) => {
+  return NextResponse.json(db);
+};
+
+export const PUT = async (request: NextRequest) => {
+  const body = await request.json();
+  const updatedDb = db.map((e) => {
+    return e.id === 1 ? { ...e, ...body } : e;
+  });
+  console.log("UPDATED:", updatedDb);
+  return NextResponse.json(updatedDb);
+};
+  
