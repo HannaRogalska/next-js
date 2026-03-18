@@ -7,11 +7,6 @@ const db = [
   { title: "Add authorization", completed: false, id: 3 },
 ];
 
-
-export const GET = (request: NextRequest) => {
-  return NextResponse.json(db);
-};
-
 export const PUT = async (request: NextRequest) => {
   const body = await request.json();
   const updatedDb = db.map((e) => {

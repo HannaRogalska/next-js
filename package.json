@@ -17,6 +17,7 @@
     "@heroui/theme": "^2.4.26",
     "axios": "^1.13.5",
     "framer-motion": "^12.35.1",
+    "mongodb": "^7.1.0",
     "mongoose": "^9.2.1",
     "nanoid": "^5.1.6",
     "next": "16.1.6",
