@@ -16,12 +16,3 @@ export const GET = (request: NextRequest) => {
   return NextResponse.json(db);
 };
 
-export const PUT = async (request: NextRequest) => {
-  const body = await request.json();
-  const updatedDb = db.map((e) => {
-    return e.id === 1 ? { ...e, ...body } : e;
-  });
-  console.log("UPDATED:", updatedDb);
-  return NextResponse.json(updatedDb);
-};
-  

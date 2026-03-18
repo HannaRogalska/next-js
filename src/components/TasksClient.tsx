@@ -35,7 +35,7 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
   }, [])
   
 
-    const createPutFun = async () => {
+    const createPutFun = async (id:number) => {
       await fetch(`/api/tasks`, {
         method: "PUT",
         headers: {
@@ -47,13 +47,22 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
         }),
       });
     };
- 
+  const deleteTaskBack = async(id: number) => {
+    await fetch(`/api/tasks/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+ }
   const addTask = ({ title, description, id, completed }: Task) => {
     setTasks((prev) => [...prev, { title, description, id, completed }]);
-    createPutFun()
+    createPutFun(id);
   };
   const deleteTask = (id: number) => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
+    deleteTaskBack(id);
+    
   };
   const onChangeTask = (task: Task) => {
     setTasks((prev) => prev.map((el) => (el.id === task.id ? task : el)));
