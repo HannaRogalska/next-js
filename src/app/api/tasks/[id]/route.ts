@@ -1,4 +1,5 @@
-
+import clientPromise from "@/app/lib/mongodb";
+import { Task } from "@/types/Task";
 import { NextRequest, NextResponse } from "next/server";
 
 const db = [
@@ -25,4 +26,3 @@ export const DELETE = async (
 
   return NextResponse.json(updatedDb);
 };
-  

@@ -23,6 +23,12 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
   useEffect(() => {
     if (tasks.length === 0) return;
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    const getAllTask = async () => {
+      const response = await fetch("api/tasks");
+      const data = await response.json()
+      return setTasks(data);
+    }
+
   }, [tasks]);
 
   useEffect(() => {
@@ -34,7 +40,15 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
     fetchData()
   }, [])
   
-
+  const saveTask = async ({ title, description, id, completed }: Task) => {
+    await fetch(`/api/tasks`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, description, id, completed }),
+    });
+  };
     const createPutFun = async (id:number) => {
       await fetch(`/api/tasks`, {
         method: "PUT",
@@ -47,6 +61,7 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
         }),
       });
     };
+  
   const deleteTaskBack = async(id: number) => {
     await fetch(`/api/tasks/${id}`, {
       method: "DELETE",
@@ -55,9 +70,9 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
       }
     });
  }
-  const addTask = ({ title, description, id, completed }: Task) => {
+  const addTask = async ({ title, description, id, completed }: Task) => {
     setTasks((prev) => [...prev, { title, description, id, completed }]);
-    createPutFun(id);
+    saveTask({ title, description, id, completed });
   };
   const deleteTask = (id: number) => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
@@ -67,6 +82,7 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
   const onChangeTask = (task: Task) => {
     setTasks((prev) => prev.map((el) => (el.id === task.id ? task : el)));
     setEditingTask(null)
+    createPutFun(task.id);
   };
 
   const toggleTask = (id: number) => {
