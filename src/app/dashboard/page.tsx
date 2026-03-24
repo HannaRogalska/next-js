@@ -1,9 +1,14 @@
-import { getStats, allTasks } from "@/app/api/fakeApi";
+
+import { getTasks } from "@/app/actions/taskActions";
 import TasksClient from "@/components/TasksClient";
+import { Task } from "@/types/Task";
+
 
 export default async function DashboardPage() {
-  const [getData, getTasks] = await Promise.all([getStats(), allTasks()]);
- 
+
+  const tasks: Task[] = await getTasks();
+  
+  
 
   return (
     <div className="space-y-8">
@@ -14,7 +19,7 @@ export default async function DashboardPage() {
 
       <div className="bg-white p-6 rounded-xl shadow">
         <h2 className="text-xl font-semibold mb-4">Recent tasks</h2>
-          <TasksClient initialTasks={getTasks} />
+        <TasksClient initialTasks={tasks} />
       </div>
     </div>
   );

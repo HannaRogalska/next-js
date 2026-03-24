@@ -1,16 +1,19 @@
 "use client";
 
-import { PropsForm } from "@/types/Task";
 import { useState } from "react";
+import { PropsForm } from "@/types/Task";
 
 const TaskForm = ({ addTaskForm }: PropsForm) => {
   const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-console.log(title)
-
-  const handelSubmit = (e: React.FormEvent) => {
-    e.preventDefault;
-    addTaskForm({ title, description, id: Date.now(), completed: false });
+  const [description, setDescription] = useState("");
+  const handelSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    addTaskForm({
+      title,
+      description,
+      id: Date.now().toString(),
+      completed: false,
+    });
     setTitle("");
     setDescription("");
   };
@@ -23,8 +26,8 @@ console.log(title)
         type="text"
         value={title}
         placeholder="Title"
-        className="w-full border p-2 rounded"
         onChange={(e) => setTitle(e.target.value)}
+        className="w-full border p-2 rounded"
       />
       <textarea
         placeholder="Description"
