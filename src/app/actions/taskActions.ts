@@ -2,6 +2,7 @@
 
 import clientPromise from "@/app/lib/mongodb";
 import { Task } from "@/types/Task";
+import { ObjectId } from "mongodb";
 import { revalidatePath } from "next/cache";
 
 export const getTasks = async () => {
@@ -30,6 +31,12 @@ export const createTask = async ({ title, description, completed }: Task) => {
     id: result.insertedId.toString(),
     title,
     description,
-    completed
+    completed,
   } as Task;
+};
+
+export const deleteTaskDB = async (id: string) => {
+  const client = await clientPromise;
+  const db = client.db("task-flow");
+  await db.collection("task").deleteOne({ _id: new ObjectId(id) })
 };

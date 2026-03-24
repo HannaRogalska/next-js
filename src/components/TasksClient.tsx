@@ -6,7 +6,7 @@ import { TaskCard } from "./TaskCard";
 import TaskForm from "./TaskForm";
 import EditTaskModal from "./EditTaskModal";
 import StateBox from "./StateBox";
-import { createTask } from "@/app/actions/taskActions";
+import { createTask, deleteTaskDB } from "@/app/actions/taskActions";
 
 export default function TasksClient({ initialTasks }: PropsTasks) {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
@@ -21,7 +21,8 @@ export default function TasksClient({ initialTasks }: PropsTasks) {
     });
     setTasks((prev) => [...prev, newTask]);
   };
-  const deleteTask = (id: string) => {
+  const deleteTask = async(id: string) => {
+     await deleteTaskDB(id);
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };
   const onChangeTask = (task: Task) => {
