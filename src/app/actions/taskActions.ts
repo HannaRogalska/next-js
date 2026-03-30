@@ -39,4 +39,13 @@ export const deleteTaskDB = async (id: string) => {
   const client = await clientPromise;
   const db = client.db("task-flow");
   await db.collection("task").deleteOne({ _id: new ObjectId(id) })
+   revalidatePath("/dashboard");
+};
+
+export const changeTask = async (id: string, { ...body }: Partial<Task>) => {
+  const client = await clientPromise;
+  const db = client.db("task-flow");
+  await db
+    .collection("task")
+    .findOneAndUpdate({ _id: new ObjectId(id) }, { $set: { ...body } });
 };
