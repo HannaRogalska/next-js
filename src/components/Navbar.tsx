@@ -7,6 +7,7 @@ import {
   NavbarItem,
 } from "@heroui/navbar";
 import Link from "next/link";
+
 const AppNavbar = () => {
   return (
     <Navbar className="mt-2">
@@ -33,6 +34,9 @@ const AppNavbar = () => {
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
           <Link href="/auth/signin">Login</Link>
+        </NavbarItem>
+        <NavbarItem className="hidden lg:flex">
+          <Link href="/auth/register">Register</Link>
         </NavbarItem>
       </NavbarContent>
     </Navbar>
