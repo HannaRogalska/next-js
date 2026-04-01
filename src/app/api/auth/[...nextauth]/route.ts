@@ -17,7 +17,7 @@ export const authOptions = {
         const db = client.db("task-flow");
         const user = await db
           .collection("users")
-          .findOne({ email: credentials?.email });
+          .findOne({ email: credentials?.email});
         if (!user) return null;
         const isValid = await compare(credentials?.password, user.password);
         if (!isValid) return null;
