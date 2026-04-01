@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 const TaskPage = () => {
    const { id } = useParams();
   const [task, setTask] = useState<Task | null>(null);
-  const idNumber = Number(id)
 
    useEffect(() => {
      if (!id) return; 
@@ -14,7 +13,7 @@ const TaskPage = () => {
      if (!data) return;
 
      const tasks: Task[] = JSON.parse(data);
-     const foundTask = tasks.find((e) => e.id === idNumber);
+     const foundTask = tasks.find((e) => e.id === id);
 
      if (foundTask) setTask(foundTask);
    }, [id]);

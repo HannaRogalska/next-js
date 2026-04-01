@@ -32,7 +32,7 @@ const AppNavbar = () => {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+          <Link href="/auth/signin">Login</Link>
         </NavbarItem>
       </NavbarContent>
     </Navbar>
