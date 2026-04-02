@@ -19,7 +19,8 @@ export default function RegisterPage() {
 
       setEmail(""),
           setName(""),
-          setPassword("")
+        setPassword("")
+      
       redirect('/dashboard')
   };
   return (
