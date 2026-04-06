@@ -7,12 +7,13 @@ import {
   NavbarItem,
 } from "@heroui/navbar";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const AppNavbar = () => {
 
   const { data: session } = useSession();
   console.log(session);
+  
 
   return (
     <Navbar className="mt-2">
@@ -40,15 +41,15 @@ const AppNavbar = () => {
         <NavbarItem className="hidden lg:flex">
           <Link href="/auth/register">Register</Link>
         </NavbarItem>
-        {session ?(
+        {session ? (
+          <NavbarItem className="hidden lg:flex">
+            <button onClick={()=>signOut({callbackUrl: "/auth/signin"})}>Logout</button>
+          </NavbarItem>
+        ) : (
           <NavbarItem className="hidden lg:flex">
             <Link href="/auth/signin">Login</Link>
           </NavbarItem>
-        ): (
-            <NavbarItem className="hidden lg:flex">
-            <Link href="#">Logout</Link>
-          </NavbarItem>
-        )  }
+        )}
       </NavbarContent>
     </Navbar>
   );
