@@ -5,6 +5,7 @@ import { Task } from "@/types/Task";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
+
 export default async function DashboardPage() {
   const tasks: Task[] = await getTasks();
 
