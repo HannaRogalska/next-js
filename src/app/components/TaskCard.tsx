@@ -1,5 +1,5 @@
 "use client";
-import { Props } from "@/types/Task";
+import { Props } from "@/app/types/Task";
 import {
   Dropdown,
   DropdownTrigger,
@@ -41,7 +41,7 @@ export const TaskCard = ({ task, onToggle, onDelete, onEdit }: Props) => {
               className="px-3 py-1 mr-1 rounded bg-green-500 text-white mb-1.5 cursor-pointer"
               onClick={() => onEdit(task)}
             >
-             Edit file
+              Edit file
             </DropdownItem>
             <DropdownItem
               key="delete"

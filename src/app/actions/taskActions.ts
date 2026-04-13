@@ -1,7 +1,7 @@
 "use server";
 
 import clientPromise from "@/app/lib/mongodb";
-import { Task } from "@/types/Task";
+import { Task } from "@/app/types/Task";
 import { ObjectId } from "mongodb";
 import { revalidatePath } from "next/cache";
 import { unstable_cache } from "next/cache";

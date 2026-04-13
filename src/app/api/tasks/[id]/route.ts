@@ -1,5 +1,5 @@
 import clientPromise from "@/app/lib/mongodb";
-import { Task } from "@/types/Task";
+import { Task } from "@/app/types/Task";
 import { NextRequest, NextResponse } from "next/server";
 
 const db = [

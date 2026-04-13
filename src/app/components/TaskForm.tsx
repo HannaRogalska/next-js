@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { PropsForm } from "@/types/Task";
+import { PropsForm } from "@/app/types/Task";
 
 const TaskForm = ({ addTaskForm }: PropsForm) => {
   const [title, setTitle] = useState("");

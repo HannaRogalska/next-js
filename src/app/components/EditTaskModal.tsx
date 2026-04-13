@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { EditTaskModalProps, Task } from "@/types/Task";
+import { EditTaskModalProps, Task } from "@/app/types/Task";
 import { useState } from "react";
 
 const EditTaskModal = ({ task, onSave, onClose }: EditTaskModalProps) => {
@@ -44,4 +44,4 @@ const EditTaskModal = ({ task, onSave, onClose }: EditTaskModalProps) => {
   );
 };
 
-export default EditTaskModal
+export default EditTaskModal;

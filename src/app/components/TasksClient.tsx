@@ -1,32 +1,35 @@
 "use client";
 
-import { PropsTasks, Task } from "@/types/Task";
+import { PropsTasks, Task } from "@/app/types/Task";
 import { useState } from "react";
 import { TaskCard } from "./TaskCard";
 import TaskForm from "./TaskForm";
 import EditTaskModal from "./EditTaskModal";
 import StateBox from "./StateBox";
-import { changeTask, createTask, deleteTaskDB } from "@/app/actions/taskActions";
+import {
+  changeTask,
+  createTask,
+  deleteTaskDB,
+} from "@/app/actions/taskActions";
 import { useTransition } from "react";
 
 export default function TasksClient({ initialTasks }: PropsTasks) {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
-const [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
   const addTask = async ({ title, description, id, completed }: Task) => {
-   startTransition(async () => {
-     const newTask = await createTask({ title, description, id, completed });
-     setTasks((prev) => [...prev, newTask]);
-   });
+    startTransition(async () => {
+      const newTask = await createTask({ title, description, id, completed });
+      setTasks((prev) => [...prev, newTask]);
+    });
   };
   const deleteTask = async (id: string) => {
     startTransition(async () => {
       await deleteTaskDB(id);
       setTasks((prev) => prev.filter((task) => task.id !== id));
     });
-    
   };
-  const onChangeTask = async(task: Task) => {
+  const onChangeTask = async (task: Task) => {
     setTasks((prev) => prev.map((el) => (el.id === task.id ? task : el)));
     setEditingTask(null);
     await changeTask(task.id, task);

@@ -1,11 +1,9 @@
-import { PropsTasks} from '@/types/Task';
-
+import { PropsTasks } from "@/app/types/Task";
 
 const StateBox = ({ initialTasks }: PropsTasks) => {
-   const completed = initialTasks.filter((task) => task.completed).length;
-    const inProcess = initialTasks.filter((task) => !task.completed).length;
-   
-    
+  const completed = initialTasks.filter((task) => task.completed).length;
+  const inProcess = initialTasks.filter((task) => !task.completed).length;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div className="bg-white p-6 rounded-xl shadow">
@@ -24,6 +22,6 @@ const StateBox = ({ initialTasks }: PropsTasks) => {
       </div>
     </div>
   );
-}
+};
 
-export default StateBox
+export default StateBox;
